@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Sprites/WaterDroplet.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Droplet.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "center"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 45.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "center_from_left"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -45.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 45.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -45.0 ]
+}
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 18.7462
+
+[node name="Droplet" type="Node2D"]
+position = Vector2( 696, -72 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="DropletObject" type="KinematicBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2147483649
+script = ExtResource( 2 )
+speed = Vector2( 200, 200 )
+
+[node name="Sprite" type="Sprite" parent="DropletObject"]
+position = Vector2( 0, -40 )
+scale = Vector2( 0.56338, 0.56 )
+texture = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DropletObject"]
+anims/center = SubResource( 1 )
+anims/center_from_left = SubResource( 2 )
+anims/rotate = SubResource( 3 )
+anims/rotate_left = SubResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DropletObject"]
+position = Vector2( 0, -30.6969 )
+shape = SubResource( 5 )
